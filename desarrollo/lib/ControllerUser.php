@@ -142,12 +142,6 @@ class ControllerUser {
         if ($this->id > 0) {
             $q = "SELECT * FROM s24_usuario WHERE usr_id = " . $this->id;
         }
-        //if ($this->sdid > 0) {
-        //    $q = "SELECT * FROM fir_usuario WHERE fir_sede_sde_id = " . $this->sdid;
-        //}
-        //if ($this->euid > 0) {
-        //    $q = "SELECT * FROM fir_usuario WHERE fir_empresa_emp_id = " . $this->euid;
-        //}
         $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
         $resultado = mysql_num_rows($con);
         $arr = array();

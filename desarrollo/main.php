@@ -18,7 +18,7 @@ include 'include/generic_validate_session.php';
             </div>
 	    <div class="container" style="height: 300px; margin: 0 auto !important; text-align: center;">
 		<br><br>
-		<h1>BIENVENIDO AL SISTEMA DE INFORMACIÓN DE HUECOMETRO</h1>
+		<h1>BIENVENIDO AL ADMINISTRADOR DE LOS SISTEMAS DE INFORMACIÓN S24</h1>
 	    </div>	    
 	</section>
 	<footer id="footer_wrap">

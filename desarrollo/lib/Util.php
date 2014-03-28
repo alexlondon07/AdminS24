@@ -449,6 +449,9 @@ class Util {
     public function error_user_already_exist() {
         return array('output' => array('valid' => false, 'response' => array('code' => '106', 'content' => ' El correo ingresado ya lo utiliza otro usuario.')));
     }
+    public function error_cliente_already_exist() {
+        return array('output' => array('valid' => false, 'response' => array('code' => '106', 'content' => ' El correo ingresado ya lo utiliza otro cliente.')));
+    }
 
     public function error_wrong_data_login() {
         return array('output' => array('valid' => false, 'response' => array('code' => '107', 'content' => ' Usuario o Contraseña Incorrectos.')));

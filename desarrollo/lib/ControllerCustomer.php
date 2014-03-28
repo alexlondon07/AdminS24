@@ -20,7 +20,7 @@ class ControllerCustomer {
         $rqst = $_REQUEST;
         $this->op = isset($rqst['op']) ? $rqst['op'] : '';
         $this->id = isset($rqst['id']) ? intval($rqst['id']) : 0;
-       
+
         //param del cliente
         $this->ke = isset($rqst['ke']) ? $rqst['ke'] : '';
         $this->lu = isset($rqst['lu']) ? $rqst['lu'] : '';
@@ -59,36 +59,56 @@ class ControllerCustomer {
      */
     private function clisave() {
         $id = 0;
-        if ($this->id > 0) {
-            //actualiza la informacion
-            $q = "SELECT cli_id FROM s24_cliente WHERE cli_id = " . $this->id;
-            $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
-            while ($obj = mysql_fetch_object($con)) {
-                $id = $obj->cli_id;
-                $table = "s24_cliente";
-                $arrfieldscomma = array(
-                    'cli_nombre' => $this->nombre,
-                    'cli_estado' => $this->estado,
-                    'cli_email' => $this->email,
-                    'cli_url' => $this->url,
-                    'cli_fecha_inicio' => $this->fechainicio,
-                    'cli_fecha_fin' => $this->fechafin,
-                    'cli_nit' => $this->nit,
-                    'cli_telefono' => $this->telefono,
-                    'cli_pais' => $this->pais,
-                    'cli_departamento' => $this->departamento,
-                    'cli_ciudad' => $this->ciudad,
-                    'cli_direccion' => $this->direccion);
-                $arrfieldsnocomma = array('cli_dtcreate' => $this->UTILITY->date_now_server());
-                $q = $this->UTILITY->make_query_update($table, "cli_id = '$id'", $arrfieldscomma, $arrfieldsnocomma);
-                mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
-                $arrjson = array('output' => array('valid' => true, 'id' => $id));
-            }
+        if ($this->UTILITY->validate_email($this->email)) {
+            $arrjson = $this->UTILITY->error_wrong_email();
         } else {
-            $q = "INSERT INTO s24_cliente (cli_dtcreate, cli_nombre, cli_estado, cli_email, cli_url, cli_fecha_inicio, cli_fecha_fin, cli_nit, cli_telefono, cli_pais, cli_departamento, cli_ciudad, cli_direccion) VALUES (" . $this->UTILITY->date_now_server() . ", '$this->nombre', '$this->estado', '$this->email', '$this->url', '$this->fechainicio', '$this->fechafin', '$this->nit', '$this->telefono', '$this->pais', '$this->departamento', '$this->ciudad', '$this->direccion')";
-            mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
-            $id = mysql_insert_id();
-            $arrjson = array('output' => array('valid' => true, 'id' => $id));
+            if ($this->id > 0) {
+                //se verifica que el email está disponible
+                $q = "SELECT cli_id FROM s24_cliente WHERE cli_email = '" . $this->email . "' AND cli_id != $this->id ";
+                $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
+                $resultado = mysql_num_rows($con);
+                if ($resultado == 0) {
+                    //actualiza la informacion
+                    $q = "SELECT cli_id FROM s24_cliente WHERE cli_id = " . $this->id;
+                    $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
+                    while ($obj = mysql_fetch_object($con)) {
+                        $id = $obj->cli_id;
+                        $table = "s24_cliente";
+                        $arrfieldscomma = array(
+                            'cli_nombre' => $this->nombre,
+                            'cli_estado' => $this->estado,
+                            'cli_email' => $this->email,
+                            'cli_url' => $this->url,
+                            'cli_fecha_inicio' => $this->fechainicio,
+                            'cli_fecha_fin' => $this->fechafin,
+                            'cli_nit' => $this->nit,
+                            'cli_telefono' => $this->telefono,
+                            'cli_pais' => $this->pais,
+                            'cli_departamento' => $this->departamento,
+                            'cli_ciudad' => $this->ciudad,
+                            'cli_direccion' => $this->direccion);
+                        $arrfieldsnocomma = array('cli_dtcreate' => $this->UTILITY->date_now_server());
+                        $q = $this->UTILITY->make_query_update($table, "cli_id = '$id'", $arrfieldscomma, $arrfieldsnocomma);
+                        mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
+                        $arrjson = array('output' => array('valid' => true, 'id' => $id));
+                    }
+                } else {
+                    $arrjson = $this->UTILITY->error_cliente_already_exist();
+                }
+            } else {
+                //se verifica que el email está disponible
+                $q = "SELECT cli_id FROM s24_cliente WHERE cli_email = '" . $this->email . "' AND cli_id != $this->id ";
+                $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
+                $resultado = mysql_num_rows($con);
+                if ($resultado == 0) {
+                    $q = "INSERT INTO s24_cliente (cli_dtcreate, cli_nombre, cli_estado, cli_email, cli_url, cli_fecha_inicio, cli_fecha_fin, cli_nit, cli_telefono, cli_pais, cli_departamento, cli_ciudad, cli_direccion) VALUES (" . $this->UTILITY->date_now_server() . ", '$this->nombre', '$this->estado', '$this->email', '$this->url', '$this->fechainicio', '$this->fechafin', '$this->nit', '$this->telefono', '$this->pais', '$this->departamento', '$this->ciudad', '$this->direccion')";
+                    mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
+                    $id = mysql_insert_id();
+                    $arrjson = array('output' => array('valid' => true, 'id' => $id));
+                } else {
+                    $arrjson = $this->UTILITY->error_cliente_already_exist();
+                }
+            }
         }
         $this->response = ($arrjson);
     }

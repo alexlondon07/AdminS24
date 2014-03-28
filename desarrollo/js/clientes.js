@@ -27,7 +27,7 @@ function initcliente() {
     });
 
     $("#dialog-form").dialog({
-        autoOpen: false, height: 700, width: 450, modal: true,
+        autoOpen: false, height: 500, width: 1000, modal: true,
         buttons: {
             "Guardar": function() {
                 var bValid = true;
@@ -39,11 +39,14 @@ function initcliente() {
                 }
             },
             "Cancelar": function() {
+                UTIL.clearForm('formcreate1');
+                UTIL.clearForm('formcreate2');
                 $(this).dialog("close");
             }
         },
         close: function() {
-            UTIL.clearForm('formcreate');
+            UTIL.clearForm('formcreate1');
+            UTIL.clearForm('formcreate2');
             updateTips('');
         }
     });

@@ -85,62 +85,70 @@ $arrclientes = $arrclientes['output']['response'];
         </footer>
         <div id="dialog-form" title="Cliente" style="display: none;">
             <p class="validateTips"></p>
-            <form class="form-horizontal" id="formcreate">
-                <div class="control-group">
-                    <label class="control-label">Nombre</label>
-                    <div class="controls"><input type="text" name="nombre" id="nombre" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Estado</label>
-                    <div class="controls">
-                        <select name="estado" id="estado" class="text ui-widget-content ui-corner-all" >
-                            <option value="seleccione">Seleccione...</option>
-                            <option value="Activo">Activo</option>
-                            <option value="Inactivo">Inactivo</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Email</label>
-                    <div class="controls"><input type="email" name="email" id="email" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">URL</label>
-                    <div class="controls"><input type="text" name="url" id="url" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Fecha Inicio</label>
-                    <div class="controls"><input type="text" name="fechainicio" id="fechainicio" readonly="true" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Fecha Fin</label>
-                    <div class="controls"><input type="text" name="fechafin" id="fechafin" readonly="true" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">NIT</label>
-                    <div class="controls"><input type="text" name="nit" id="nit" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Telefono</label>
-                    <div class="controls"><input type="text" name="telefono" id="telefono" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">País</label>
-                    <div class="controls"><input type="text" name="pais" id="pais" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Departamento</label>
-                    <div class="controls"><input type="text" name="departamento" id="departamento" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Ciudad</label>
-                    <div class="controls"><input type="text" name="ciudad" id="ciudad" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Dirección</label>
-                    <div class="controls"><input type="text" name="direccion" id="direccion" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-            </form>
+            <table>
+                <tr>
+                    <td>
+                        <form id="formcreate1" class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label">Nombre</label>
+                                <div class="controls"><input type="text" name="nombre" id="nombre" onKeyPress="return soloLetras(event);" class="text ui-widget-content ui-corner-all" /></div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Estado</label>
+                                <div class="controls">
+                                    <select name="estado" id="estado" class="text ui-widget-content ui-corner-all" >
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Email</label>
+                                <div class="controls"><input type="email" name="email" id="email" onKeyPress="return sololetras_numeros(event);" class="text ui-widget-content ui-corner-all" /></div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">URL</label>
+                                <div class="controls"><input type="text" name="url" id="url" class="text ui-widget-content ui-corner-all" /></div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Fecha Inicio</label>
+                                <div class="controls"><input type="text" name="fechainicio" id="fechainicio" readonly="true" class="text ui-widget-content ui-corner-all" /></div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Fecha Fin</label>
+                                <div class="controls"><input type="text" name="fechafin" id="fechafin" readonly="true" class="text ui-widget-content ui-corner-all" /></div>
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <form id="formcreate2" class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label">NIT</label>
+                                <div class="controls"><input type="text" name="nit" id="nit" class="text ui-widget-content ui-corner-all" /></div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Telefono</label>
+                                <div class="controls"><input type="text" name="telefono" id="telefono" onKeyPress="return soloNumeros(event);" class="text ui-widget-content ui-corner-all" /></div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">País</label>
+                                <div class="controls"><input type="text" name="pais" id="pais" onKeyPress="return Sololetrasnew(event);" class="text ui-widget-content ui-corner-all" /></div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Departamento</label>
+                                <div class="controls"><input type="text" name="departamento" id="departamento" onKeyPress="return Sololetrasnew(event);" class="text ui-widget-content ui-corner-all" /></div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Ciudad</label>
+                                <div class="controls"><input type="text" name="ciudad" id="ciudad" onKeyPress="return Sololetrasnew(event);" class="text ui-widget-content ui-corner-all" /></div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Dirección</label>
+                                <div class="controls"><input type="text" name="direccion" id="direccion" class="text ui-widget-content ui-corner-all" /></div>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
         </div>
         <?php include 'include/generic_script.php'; ?>
         <link rel="stylesheet" media="screen" href="css/dynamictable.css" type="text/css" />
