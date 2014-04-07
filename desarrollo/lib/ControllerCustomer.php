@@ -20,7 +20,7 @@ class ControllerCustomer {
         $rqst = $_REQUEST;
         $this->op = isset($rqst['op']) ? $rqst['op'] : '';
         $this->id = isset($rqst['id']) ? intval($rqst['id']) : 0;
-
+        
         //param del cliente
         $this->ke = isset($rqst['ke']) ? $rqst['ke'] : '';
         $this->lu = isset($rqst['lu']) ? $rqst['lu'] : '';

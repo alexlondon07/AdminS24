@@ -8,11 +8,11 @@
  */
 class ConectionDb {
 
-    var $fechmode = PDO::FETCH_ASSOC; // Obtiene una fila de resultado como un array asociativo
-    var $error_connection = "";
-    var $sql_query;
     private $host, $user, $pass, $db, $connection, $server_date;
 
+    /**
+     * Constructor que establece los datos de conexion a la base de datos
+     */
     public function __construct() {
         try {
             $this->host = "localhost";
@@ -31,38 +31,14 @@ class ConectionDb {
         return $this->error_connection;
     }
 
-    function SetFetchMode($tipo) {
-        //FETCH_ASSOC o 	FETCH_NUM
-        $this->fechmode = $tipo;
-    }
-
-    function Execute($sql, $array = NULL) {
-        $consulta = $this->connection->prepare($sql);
-        $consulta->setFetchMode($this->fechmode);
-        $consulta->execute($array);
-        $this->sql_query = $consulta;
-
-        return $this->sql_query;
-    }
-
-    function fetchrow() {
-        return $this->sql_query->fetch($this->fechmode);
-    }
-
-    //Ver numero de registro arojado por la consulta realizada
-    function numrows() {
-        return $this->sql_query->rowCount();
-    }
-
-    //Para varios registros de la consulta
-    function GetArray() {
-        return $this->sql_query;
-    }
-
-    //Establece la connexion con la base de datos
+    /**
+     * Establece la connexion con la base de datos
+     */
     public function openConect() {
         try {
-            $this->connection = mysql_connect($this->host, $this->user, $this->pass);
+            $this->connection =mysql_connect($this->host, $this->user, $this->pass);
+            //$this->connection = new PDO("mysql:host=$this->host;dbname=$this->bd", $this->user, $this->pass);
+            //$this->connection->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
             if (!$this->connection) {
                 throw new Exception("No fue posible conectarse al servidor MySQL");
             }
