@@ -2,8 +2,7 @@
 
 -- SE CARGAN USUARIOS
 INSERT INTO `s24_usuario` (`usr_id`, `s24_cliente_cli_id`, `usr_dtcreate`, `usr_habilitado`, `usr_email`, `usr_pass`, `usr_nombre`, `usr_apellido`, `usr_identificacion`, `usr_cargo`, `usr_telefono`, `usr_celular`, `usr_pais`, `usr_departamento`, `usr_ciudad`, `usr_direccion`) VALUES
-(1, 1, '2013-09-20 09:44:17', 1, 'camilo.garzon@secuencia24.com', 'AFA7A99B6F47185EB381114677B82598B4D1542E', 'camilo.garzon', 'Garzon', '123123', 'Ingeniero', '2885478', '3002885478', 'Colombia', 'Antioquia', 'Medellin', 'Calle 34 -454'),
-(2, 1, '2013-09-20 09:44:17', 1, 'prueba@correo.com', '95B490918894B85EB280AF6B54DB9DBF811ED3D7', 'prueba', 'apellido_prueba', '123456789', 'testing', '654987321', '321654987', 'elpais', 'departamento-estado', 'laciudad', 'ladireccion');
+(1, 1, '2013-09-20 09:44:17', 1, 'prueba@correo.com', '95B490918894B85EB280AF6B54DB9DBF811ED3D7', 'prueba', 'apellido_prueba', '123456789', 'testing', '654987321', '321654987', 'elpais', 'departamento-estado', 'laciudad', 'ladireccion');
 
 
 -- SE CARGAN PERFILES
